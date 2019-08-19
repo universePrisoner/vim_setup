@@ -133,3 +133,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:ycm_filepath_blacklist = {}
 set completeopt-=preview
 
+if &diff
+    highlight! link DiffText MatchParen
+endif
+
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
