@@ -1,3 +1,4 @@
+" Author of this file is https://github.com/wincent
 " Cycle through relativenumber + number, number (only), and no numbering.
 function! mappings#cycle_numbering() abort
   if exists('+relativenumber')
