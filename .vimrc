@@ -42,7 +42,6 @@ let g:conoline_color_insert_nr_light = "ctermbg=red"
 " Plugins installation
 call plug#begin('~/.vim/plugged')
 	"""""" FileSystem
-	"Plug 'scrooloose/nerdtree'
 	Plug 'airblade/vim-gitgutter'
 	"""""" Colors etc.
 	Plug 'vim-airline/vim-airline-themes'
@@ -60,14 +59,6 @@ call plug#begin('~/.vim/plugged')
 	"""""" Errors
 call plug#end()
 
-" FileSystem
-"""""""""""" NERDTree settings
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-"nmap <F6> :NERDTreeToggle<CR>
-"let NERDTreeMinimalUI = 1
-"let NERDTreeDirArrows = 1
 """""""""""" CTRP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 

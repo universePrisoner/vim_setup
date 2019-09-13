@@ -1,3 +1,5 @@
+![vim config file](./src/config.png)
+
 # vim_setup
 Basic VIM setup.
 Aim of this file is do more with native VIM features and less with plugins. But the plugins are awesome.
