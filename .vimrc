@@ -8,12 +8,14 @@ set noswapfile
 set cursorline
 set syntax=on
 set guifont=Monofour\ 14
-set list listchars=tab:»\ ,trail:·
+set listchars=tab:»\ ,trail:·
 set path+=**
 set wildmenu
 set incsearch
 set ic
-set foldmethod=indent
+set foldmethod=syntax
+let javaScript_fold=1
+set foldlevelstart=99
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
@@ -25,6 +27,10 @@ set wildmode=longest,list
 set nowrap
 set textwidth=0
 set wrapmargin=0
+set splitbelow
+set splitright
+set lazyredraw
+set undofile
 au BufNewFile,BufRead *.html set filetype=ejs
 
 " Active line highlight
@@ -36,7 +42,7 @@ let g:conoline_color_insert_nr_light = "ctermbg=red"
 " Plugins installation
 call plug#begin('~/.vim/plugged')
 	"""""" FileSystem
-	Plug 'scrooloose/nerdtree'
+	"Plug 'scrooloose/nerdtree'
 	Plug 'airblade/vim-gitgutter'
 	"""""" Colors etc.
 	Plug 'vim-airline/vim-airline-themes'
@@ -56,12 +62,12 @@ call plug#end()
 
 " FileSystem
 """""""""""" NERDTree settings
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-nmap <F6> :NERDTreeToggle<CR>
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"nmap <F6> :NERDTreeToggle<CR>
+"let NERDTreeMinimalUI = 1
+"let NERDTreeDirArrows = 1
 """""""""""" CTRP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
@@ -116,9 +122,12 @@ highlight GitGutterAdd    guifg=#009900 guibg=#1D1F21 ctermfg=2 ctermbg=green
 highlight GitGutterChange guifg=#bbbb00 guibg=#1D1F21 ctermfg=3 ctermbg=white
 highlight GitGutterDelete guifg=#ff2222 guibg=#1D1F21 ctermfg=1 ctermbg=red
 set rtp+=~/.fzf
-let g:ctrlp_max_files=0
+let g:ctrlp_max_files=10
 let g:ctrlp_max_depth=40
+let g:ctrlp_match_window = 'min:4,max:35'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " It's useful to show the buffer number in the status line.
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -138,3 +147,8 @@ if &diff
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+nnoremap <F3> :set list!<CR>
+
+" <Leader>r -- Cycle through relativenumber + number, number (only), and no
+" numbering (mnemonic: relative).
+nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
