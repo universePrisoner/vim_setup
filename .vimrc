@@ -9,14 +9,14 @@ set textwidth=80
 set noswapfile
 set cursorline
 set syntax=on
-set guifont=Monofour\ 14
+set guifont=CamingoCode\ 13
 set listchars=tab:»\ ,trail:·
 set path+=**
 set wildmenu
 set incsearch
 set ic
-set foldmethod=syntax
-let javaScript_fold=1
+set foldmethod=indent
+let javaScript_fold=3
 set foldlevelstart=99
 set foldnestmax=10
 set nofoldenable
@@ -35,16 +35,16 @@ set nobackup
 set nowritebackup
 " Set autoupdate for opened files 
 set autoread
-au BufNewFile,BufRead *.html set filetype=ejs
+" au BufNewFile,BufRead *.html set filetype=ejs
 " Active line highlight
 let g:conoline_color_normal_light = "cterm=240"
 let g:conoline_color_normal_nr_light = "ctermbg=240 ctermfg=white"
 let g:conoline_color_insert_light = "ctermbg=black"
 let g:conoline_color_insert_nr_light = "ctermbg=red"
-let mapleader="-"
+let mapleader=","
 
 " Plugins Installation
-" ========================================== start =====================================================
+" ========================================== start ============================
 call plug#begin('~/.vim/plugged')
 	Plug 'airblade/vim-gitgutter'
 	Plug 'vim-airline/vim-airline-themes'
@@ -58,6 +58,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'w0rp/ale'
 	Plug 'nikvdp/ejs-syntax'
 	Plug 'Valloric/YouCompleteMe'
+	Plug 'morhetz/gruvbox'
 call plug#end()
 
 
@@ -95,6 +96,7 @@ let g:ale_set_highlights = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+autocmd BufEnter *.html ALEDisable
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 
@@ -120,7 +122,8 @@ nnoremap <F3> :set list!<CR>
 nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>; mqA;<esc>'q
+" Drop hilighting for search results
+nnoremap <leader>. :noh<CR>
 
 
 " inoremap 
@@ -135,12 +138,22 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " onoremap   
 " ========================================== start =====================================================
 onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap in) :<c-u>normal! F)vi(<cr>
+onoremap in) :<c-u>normal! f)vi(<cr>
+onoremap il( :<c-u>normal! F(vi(<cr>
+onoremap il) :<c-u>normal! F)vi(<cr>
 
 "  Prettier
 " ========================================== start =====================================================
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:prettier#config#tab_width = 4
+let g:prettier#config#use_tabs = 'true'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#parser = 'typescript'
+let g:prettier#config#html_whitespace_sensitivity = 'strict'
+
+
+
 
 " GIT
 " ========================================== start =====================================================
@@ -163,9 +176,17 @@ nmap ga <Plug>(EasyAlign)
 
 " colorscheme  
 " ========================================== start =====================================================
-colorscheme wombat256mod
-let g:enable_bold_font = 1
-let g:enable_italic_font = 1
+" colorscheme wombat256mod
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_italic=1
+let g:gruvbox_italicize_strings=1
+set background=dark
+
+
+let g:enable_bold_font = 0
+let g:enable_italic_font = 0
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -177,6 +198,11 @@ let g:polyglot_disabled = ['acpiasl']
 " another maybe unused
 let g:javascript_plugin_jsdoc = 1
 
-" LEARNING - MUST BE DELETED
-let g:ycm_server_use_vim_stdout = 1
-let g:ycm_server_log_level = 'debug'
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+
