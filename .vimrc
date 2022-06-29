@@ -43,6 +43,12 @@ let g:conoline_color_insert_light = "ctermbg=black"
 let g:conoline_color_insert_nr_light = "ctermbg=red"
 let mapleader=","
 
+let g:netrw_banner = 0
+
+" vim-polyglot
+" ========================================== start =====================================================
+let g:polyglot_disabled = ['acpiasl']
+
 " Plugins Installation
 " ========================================== start ============================
 call plug#begin('~/.vim/plugged')
@@ -54,10 +60,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'mattn/emmet-vim'
 	Plug 'sheerun/vim-polyglot'
-	Plug 'prettier/vim-prettier', { 'do': 'npm install', }
 	Plug 'w0rp/ale'
 	Plug 'nikvdp/ejs-syntax'
-	Plug 'Valloric/YouCompleteMe'
 	Plug 'morhetz/gruvbox'
 call plug#end()
 
@@ -108,15 +112,6 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
-"""""""""""""""""""""""""""""" 
-" YouCompleteMe controls
-"""""""""""""""""""""""""""""" 
-nnoremap <leader><space>gd :YcmCompleter GoToDefinition<cr>
-nnoremap <leader><space>gt :YcmCompleter GoToType<cr>
-nnoremap <leader><space>gr :YcmCompleter GoToReferences<cr>
-nnoremap <leader><space>t :YcmCompleter GetType<cr>
-nnoremap <leader><space>d :YcmCompleter GetDoc<cr>
-nnoremap <leader><space>o :YcmCompleter OrganizeImports<cr>
 """""""""""""""""""""""""""""" 
 nnoremap <F3> :set list!<CR>
 nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
@@ -191,10 +186,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" vim-polyglot
-" ========================================== start =====================================================
-let g:polyglot_disabled = ['acpiasl']
-
 " another maybe unused
 let g:javascript_plugin_jsdoc = 1
 
@@ -206,3 +197,9 @@ nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
 nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
 nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
+" set vim to chdir for each file
+if exists('+autochdir')
+    set autochdir
+else
+    autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
+endif
