@@ -11,3 +11,5 @@ Stay tune and read my .vimrc later to get more tricks and tips around the 3W.
 Features:
 - show and hide tabs : <kbd>F3</kbd>
 - toggle relative|absolute|none numbers : <kbd>Leader</kbd>+<kbd>r</kbd>
+
+Use [ALE Engine|https://github.com/dense-analysis/ale] for linting and prettify code.
