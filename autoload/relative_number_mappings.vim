@@ -1,6 +1,6 @@
 " Author of this file is https://github.com/wincent
 " Cycle through relativenumber + number, number (only), and no numbering.
-function! mappings#cycle_numbering() abort
+function Cycle_numbering() abort
   if exists('+relativenumber')
     execute {
           \ '00': 'set relativenumber   | set number',
@@ -14,7 +14,7 @@ function! mappings#cycle_numbering() abort
 endfunction
 
 " Zap trailing whitespace.
-function! mappings#zap() abort
+function Zap() abort
   let l:pos=getcurpos()
   let l:search=@/
   keepjumps %substitute/\s\+$//e
@@ -22,3 +22,6 @@ function! mappings#zap() abort
   nohlsearch
   call setpos('.', l:pos)
 endfunction
+
+nnoremap <F3> :set list!<CR>
+nnoremap <silent> <Leader>r :call Cycle_numbering()<CR>

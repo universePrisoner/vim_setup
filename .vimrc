@@ -33,7 +33,7 @@ set splitright
 set lazyredraw
 set nobackup
 set nowritebackup
-" Set autoupdate for opened files 
+" Set autoupdate for opened files
 set autoread
 " au BufNewFile,BufRead *.html set filetype=ejs
 " Active line highlight
@@ -44,6 +44,8 @@ let g:conoline_color_insert_nr_light = "ctermbg=red"
 let mapleader=","
 
 let g:netrw_banner = 0
+
+execute "source" "~/.vim/autoload/relative_number_mappings.vim"
 
 " vim-polyglot
 " ========================================== start =====================================================
@@ -90,12 +92,12 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " nnoremap
 " ========================================== start =====================================================
 " Buffers controls
-"""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
-"""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""
 nnoremap <F3> :set list!<CR>
 nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -104,16 +106,16 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>. :noh<CR>
 
 
-" inoremap 
+" inoremap
 " ========================================== start =====================================================
 inoremap kj <esc>
 inoremap <esc> <nop>
 
-" cnoremap  
+" cnoremap
 " ========================================== start =====================================================
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" onoremap   
+" onoremap
 " ========================================== start =====================================================
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap in) :<c-u>normal! f)vi(<cr>
@@ -134,12 +136,12 @@ endif
 " ========================================== start =====================================================
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-" EasyAlign 
+" EasyAlign
 " ========================================== start =====================================================
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" colorscheme  
+" colorscheme
 " ========================================== start =====================================================
 " colorscheme wombat256mod
 colorscheme gruvbox
@@ -196,3 +198,4 @@ let g:coc_global_extentions = [
 	\ 'coc-css'
 	\ ]
 " ============================== end ===========================
+"
