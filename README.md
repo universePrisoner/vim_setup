@@ -12,4 +12,4 @@ Features:
 - show and hide tabs : <kbd>F3</kbd>
 - toggle relative|absolute|none numbers : <kbd>Leader</kbd>+<kbd>r</kbd>
 
-Use [ALE Engine|https://github.com/dense-analysis/ale] for linting and prettify code.
+Use [CoC Engine|https://github.com/neoclide/coc.nvim] for autocompletion, linting and prettifying code.

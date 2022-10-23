@@ -60,9 +60,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'mattn/emmet-vim'
 	Plug 'sheerun/vim-polyglot'
-	Plug 'w0rp/ale'
 	Plug 'nikvdp/ejs-syntax'
 	Plug 'morhetz/gruvbox'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 
@@ -86,23 +86,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
-" ALE
-" ========================================== start =====================================================
-let b:ale_linters = ['eslint', 'prettier']
-let g:ale_completion_enabled = 1
-let g:ale_linters_explicit = 1
-let g:ale_sign_error = '!'
-let g:ale_sign_warning = '*'
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
-let g:ale_set_highlights = 0
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-autocmd BufEnter *.html ALEDisable
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
 
 " nnoremap
 " ========================================== start =====================================================
@@ -136,19 +119,6 @@ onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap in) :<c-u>normal! f)vi(<cr>
 onoremap il( :<c-u>normal! F(vi(<cr>
 onoremap il) :<c-u>normal! F)vi(<cr>
-
-"  Prettier
-" ========================================== start =====================================================
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-let g:prettier#config#tab_width = 4
-let g:prettier#config#use_tabs = 'true'
-let g:prettier#config#single_quote = 'true'
-let g:prettier#config#parser = 'typescript'
-let g:prettier#config#html_whitespace_sensitivity = 'strict'
-
-
-
 
 " GIT
 " ========================================== start =====================================================
@@ -203,3 +173,26 @@ if exists('+autochdir')
 else
     autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 endif
+
+" CoC
+" ============================= start ==========================
+let g:coc_global_extentions = [
+	\ 'coc-tsserver',
+	\ 'coc-prettier',
+	\ 'coc-html-css-support',
+	\ 'coc-html',
+	\ 'coc-eslint',
+	\ 'coc-cssmodules',
+	\ 'coc-yaml',
+	\ 'coc-xml',
+	\ 'coc-swagger',
+	\ 'coc-sh',
+	\ 'coc-json',
+	\ 'coc-java',
+	\ 'coc-htmlhint',
+	\ 'coc-golines',
+	\ 'coc-go',
+	\ 'coc-docker',
+	\ 'coc-css'
+	\ ]
+" ============================== end ===========================
