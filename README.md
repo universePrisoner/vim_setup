@@ -13,3 +13,12 @@ Features:
 - toggle relative|absolute|none numbers : <kbd>Leader</kbd>+<kbd>r</kbd>
 
 Use [CoC Engine|https://github.com/neoclide/coc.nvim] for autocompletion, linting and prettifying code.
+
+# Scaffolding
+
+init.sh creates basic folders and copy all files from relative folders.
+
+For testing purposes I use 'test' path inside the script to tests commands.
+To run the script properly you need to change it to "~" only.
+
+
