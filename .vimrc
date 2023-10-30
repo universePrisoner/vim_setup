@@ -43,9 +43,9 @@ let g:conoline_color_insert_light = "ctermbg=black"
 let g:conoline_color_insert_nr_light = "ctermbg=red"
 let mapleader=","
 
-let g:netrw_banner = 0
-
 execute "source" "~/.vim/autoload/relative_number_mappings.vim"
+
+let g:netrw_banner = 0
 
 " vim-polyglot
 " ========================================== start =====================================================
@@ -60,11 +60,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline'
 	Plug 'tpope/vim-surround'
 	Plug 'scrooloose/nerdcommenter'
-	Plug 'mattn/emmet-vim'
+	" Plug 'mattn/emmet-vim'
 	Plug 'sheerun/vim-polyglot'
-	Plug 'nikvdp/ejs-syntax'
+	" Plug 'nikvdp/ejs-syntax'
 	Plug 'morhetz/gruvbox'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	"Plug 'dense-analysis/ale'
 call plug#end()
 
 
@@ -98,8 +99,6 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 """"""""""""""""""""""""""""""
-nnoremap <F3> :set list!<CR>
-nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " Drop hilighting for search results
@@ -121,6 +120,8 @@ onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap in) :<c-u>normal! f)vi(<cr>
 onoremap il( :<c-u>normal! F(vi(<cr>
 onoremap il) :<c-u>normal! F)vi(<cr>
+
+
 
 " GIT
 " ========================================== start =====================================================
@@ -178,6 +179,9 @@ endif
 
 " CoC
 " ============================= start ==========================
+" Formatting selected code
+inoremap <silent><expr> <c-@> coc#refresh()
+let g:coc_start_at_startup = 1
 let g:coc_global_extentions = [
 	\ 'coc-tsserver',
 	\ 'coc-prettier',
@@ -195,7 +199,8 @@ let g:coc_global_extentions = [
 	\ 'coc-golines',
 	\ 'coc-go',
 	\ 'coc-docker',
-	\ 'coc-css'
+	\ 'coc-css',
+	\ 'coc-lightbulb',
+	\ 'coc-volar'
 	\ ]
 " ============================== end ===========================
-"

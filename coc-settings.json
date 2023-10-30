@@ -1,0 +1,8 @@
+{
+  "volar.takeOverMode.enabled": true,
+  "tsserver.enable": false,
+  "volar.autoClosingTags": true,
+  "vue.inlayHints.inlineHandlerLeading": true,
+  "vue.inlayHints.optionsWrapper": true,
+  "eslint.autoFixOnSave": true
+}
